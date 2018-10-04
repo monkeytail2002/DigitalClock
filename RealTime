@@ -1,0 +1,65 @@
+//15009351 Angus MacDonald 4/10/18 version 1.6
+//Tutor: Karen MacKay
+
+
+package digital;
+
+
+//imports prebuilt classes.
+import java.awt.*;
+import java.util.*;
+
+public class RealTime {
+	
+	
+	Label text;
+	
+	public RealTime()
+	{
+		
+	}
+	
+	public Label dateUpdate()
+	{
+		//sets the time
+		Calendar calendar = Calendar.getInstance();
+		int hour = calendar.get(Calendar.HOUR);
+		int min = calendar.get(Calendar.MINUTE);
+		int sec = calendar.get(Calendar.SECOND);
+		
+		//sets the clock time and displays twelve hour clock.
+		String twelveHour = "";
+		if (hour <10) 
+		{
+			twelveHour += "0"+hour;
+		}
+		else 
+		{
+			twelveHour += hour;
+		}
+		if(min <10) {
+			twelveHour += ":0"+min;
+		}
+		else
+		{
+			twelveHour += ":"+min;
+		}
+		
+		if(sec <10)
+		{
+			twelveHour +=":0"+sec;
+		}
+		else
+		{
+			twelveHour += ":"+sec;
+		}
+	
+		
+		//returns set time to Display class.
+		text = new Label();
+		text.setFont(new Font("Arial", Font.BOLD, 50));
+		text.setText(twelveHour);
+		return text;
+	}
+
+}
