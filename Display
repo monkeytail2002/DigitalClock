@@ -1,0 +1,75 @@
+//15009351 Angus MacDonald 4/10/18 version 1.8
+//Tutor: Karen MacKay
+
+
+package digitalclock;
+
+
+//import prebuilt java classes
+import java.awt.*;
+import javax.swing.*;
+
+
+
+
+public class Display extends JFrame implements Runnable{
+	
+	Label text;  //set the text label
+
+	RealTime date = new RealTime();  //imports the RealTime class
+	Boolean running = false;
+	
+	public Display()
+	{
+		
+	}
+
+
+
+	public void display()
+	{
+		
+		//Sets the GUI display for the clock
+		JFrame frame = new JFrame("Digital Clock");
+		frame.setSize(210,100);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		text = new Label();
+		text = date.dateUpdate();  //calls the dateUpdate method in the RealTime class and sets it to text
+		frame.add(text);  //Adds text to the GUI display
+		frame.setVisible(true);
+		
+	}
+	
+	
+	
+	public void run() 
+	{
+		//Checks whether the clock has started and updates in real time.
+		while(running)
+		{
+			date.dateUpdate();
+		
+			
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			
+		display();
+			
+		}
+	}
+	
+	public void start()
+	{
+		
+		//sets the start function that is called in the Main class.
+		running = true;
+		new Thread(this).start();
+	}
+
+}
